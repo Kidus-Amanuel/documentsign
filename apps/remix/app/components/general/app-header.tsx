@@ -49,7 +49,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const ERP_DASHBOARD_URL = 'http://localhost:3000/dashboard';
+  const ERP_DASHBOARD_URL = 'https://ceoweb-app.vercel.app/dashboard';
 
   return (
     <header
