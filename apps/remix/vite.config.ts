@@ -106,7 +106,7 @@ export default defineConfig({
         '@google-cloud/kms',
         '@google-cloud/secret-manager',
         'nodemailer',
-        /playwright/,
+        '/playwright/',
         '@playwright/browser-chromium',
         'skia-canvas',
       ],

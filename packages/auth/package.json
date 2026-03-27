@@ -13,6 +13,7 @@
     "@documenso/lib": "*",
     "@documenso/prisma": "*",
     "@hono/standard-validator": "^0.2.0",
+    "@hono/zod-validator": "^0.7.6",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@simplewebauthn/server": "^13.2.2",
