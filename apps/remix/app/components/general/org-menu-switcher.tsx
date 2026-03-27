@@ -154,12 +154,14 @@ export const OrgMenuSwitcher = () => {
               </h3>
             </div>
             <div className="flex-1 space-y-1 overflow-y-auto p-1.5">
-              {organisations.map((org) => (
-                <div
-                  className="group relative"
-                  key={org.id}
-                  onMouseEnter={() => setHoveredOrgId(org.id)}
-                >
+              {organisations
+                .filter((org) => user.source !== 'ERP_SSO' || org.id === currentOrganisation?.id)
+                .map((org) => (
+                  <div
+                    className="group relative"
+                    key={org.id}
+                    onMouseEnter={() => setHoveredOrgId(org.id)}
+                  >
                   <DropdownMenuItem
                     className={cn(
                       'text-muted-foreground w-full px-4 py-2',
@@ -195,12 +197,14 @@ export const OrgMenuSwitcher = () => {
                 </div>
               ))}
 
-              <Button variant="ghost" className="w-full justify-start" asChild>
-                <Link to="/settings/organisations?action=add-organisation">
-                  <Plus className="mr-2 h-4 w-4" />
-                  <Trans>Create Organisation</Trans>
-                </Link>
-              </Button>
+              {user.source !== 'ERP_SSO' && (
+                <Button variant="ghost" className="w-full justify-start" asChild>
+                  <Link to="/settings/organisations?action=add-organisation">
+                    <Plus className="mr-2 h-4 w-4" />
+                    <Trans>Create Organisation</Trans>
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
 
@@ -253,7 +257,7 @@ export const OrgMenuSwitcher = () => {
                   </div>
                 )}
 
-                {displayedOrg && (
+                {displayedOrg && user.source !== 'ERP_SSO' && (
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to={`/o/${displayedOrg.url}/settings/teams?action=add-team`}>
                       <Plus className="mr-2 h-4 w-4" />

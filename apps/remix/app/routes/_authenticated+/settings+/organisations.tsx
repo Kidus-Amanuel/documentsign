@@ -1,5 +1,6 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { useSession } from '@documenso/lib/client-only/providers/session';
 
 import { OrganisationCreateDialog } from '~/components/dialogs/organisation-create-dialog';
 import { OrganisationInvitations } from '~/components/general/organisations/organisation-invitations';
@@ -8,14 +9,19 @@ import { UserOrganisationsTable } from '~/components/tables/user-organisations-t
 
 export default function TeamsSettingsPage() {
   const { _ } = useLingui();
+  const { user } = useSession();
 
   return (
     <div>
       <SettingsHeader
         title={_(msg`Organisations`)}
-        subtitle={_(msg`Manage all organisations you are currently associated with.`)}
+        subtitle={
+          user.source === 'ERP_SSO'
+            ? _(msg`Your default organisation associated with the ERP.`)
+            : _(msg`Manage all organisations you are currently associated with.`)
+        }
       >
-        <OrganisationCreateDialog />
+        {user.source !== 'ERP_SSO' && <OrganisationCreateDialog />}
       </SettingsHeader>
 
       <UserOrganisationsTable />

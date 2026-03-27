@@ -23,6 +23,12 @@ export const createOrganisationRoute = authenticatedProcedure
     const { name, priceId } = input;
     const { user } = ctx;
 
+    if (user.source === 'ERP_SSO') {
+      throw new AppError(AppErrorCode.UNAUTHORIZED, {
+        message: 'Organizations cannot be created for SSO users.',
+      });
+    }
+
     ctx.logger.info({
       input: {
         priceId,
