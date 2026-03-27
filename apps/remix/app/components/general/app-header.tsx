@@ -1,7 +1,7 @@
 import { type HTMLAttributes, useEffect, useState } from 'react';
 
 import { ReadStatus } from '@prisma/client';
-import { InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
+import { ArrowLeft, InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
 import { Link, useParams } from 'react-router';
 
 import { useSession } from '@documenso/lib/client-only/providers/session';
@@ -49,6 +49,8 @@ export const Header = ({ className, ...props }: HeaderProps) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const ERP_DASHBOARD_URL = 'http://localhost:3000/dashboard';
+
   return (
     <header
       className={cn(
@@ -58,13 +60,26 @@ export const Header = ({ className, ...props }: HeaderProps) => {
       )}
       {...props}
     >
-      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-x-4 px-4 md:justify-normal md:px-8">
-        <Link
-          to={getRootHref(params)}
-          className="focus-visible:ring-ring ring-offset-background hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 md:inline"
-        >
-          <BrandingLogo className="h-6 w-auto" />
-        </Link>
+      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-x-4 px-4 md:justify-normal md:px-8 text-center uppercase">
+        <div className="flex items-center gap-x-4">
+          <Link
+            to={getRootHref(params)}
+            className="focus-visible:ring-ring ring-offset-background hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 md:inline"
+          >
+            <BrandingLogo className="h-6 w-auto" />
+          </Link>
+
+          <Button
+            asChild
+            variant="ghost"
+            className="hidden h-9 items-center border border-amber-200 bg-amber-50 px-3 text-[10px] font-black tracking-widest text-amber-700 hover:bg-amber-100 hover:text-amber-800 md:flex rounded-full"
+          >
+            <a href={ERP_DASHBOARD_URL}>
+              <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
+              Return to CEO Dashboard
+            </a>
+          </Button>
+        </div>
 
         <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
 
