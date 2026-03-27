@@ -162,7 +162,15 @@ export const erpSsoRoute = new Hono<HonoAuthContext>().get(
     // 4. Set Session Cookie
     await setSessionCookie(c, tokenStr);
 
-    // 5. Redirect to tenant documents
-    return c.redirect(`/t/${tenantId}/documents`);
+    // 5. Redirect to team documents
+    const team = await prisma.team.findFirst({
+      where: { organisationId: organisation.id },
+    });
+
+    if (team) {
+      return c.redirect(`/t/${team.url}/documents`);
+    }
+
+    return c.redirect(`/o/${tenantId}`);
   }
 );
