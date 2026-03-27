@@ -6,10 +6,12 @@ import * as crypto from 'crypto';
 import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
 import type { RequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
 import { prisma } from '@documenso/prisma';
+import { OrganisationType } from '@prisma/client';
 
 import { createSession, generateSessionToken } from '../lib/session/session';
 import { setSessionCookie } from '../lib/session/session-cookies';
 import type { HonoAuthContext } from '../types/context';
+import { createPersonalOrganisation } from '@documenso/lib/server-only/organisation/create-organisation';
 
 export const erpSsoRoute = new Hono<HonoAuthContext>().get(
   '/',
@@ -84,7 +86,74 @@ export const erpSsoRoute = new Hono<HonoAuthContext>().get(
       });
     }
 
-    // 2. Multi-Tenant Mapping (skipping explicit Documenso Team creation)
+    // 2. Multi-Tenant Mapping
+    let organisation = await prisma.organisation.findFirst({
+      where: { url: tenantId },
+      include: {
+        groups: true,
+      }
+    });
+
+    if (!organisation) {
+      // Create it if it doesn't exist
+      const createdOrganisation = await createPersonalOrganisation({
+        userId: user.id,
+        orgUrl: tenantId,
+        throwErrorOnOrganisationCreationFailure: true,
+        type: OrganisationType.ORGANISATION,
+      });
+
+      if (!createdOrganisation) {
+        throw new AppError(AppErrorCode.UNKNOWN_ERROR, {
+          message: 'Failed to create organisation',
+        });
+      }
+
+      organisation = createdOrganisation;
+
+      const tenantNameStr = typeof payload.tenantName === 'string' ? payload.tenantName : tenantId;
+
+      // Update names to match the ERP instead of the defaults
+      await prisma.organisation.update({
+        where: { id: organisation.id },
+        data: { name: tenantNameStr },
+      });
+
+      const team = await prisma.team.findFirst({
+        where: { organisationId: organisation.id },
+      });
+
+      if (team) {
+        await prisma.team.update({
+          where: { id: team.id },
+          data: { name: tenantNameStr },
+        });
+      }
+    } else {
+      // Add user to the existing organisation if they are not already a member
+      const isMember = await prisma.organisationMember.findFirst({
+        where: { userId: user.id, organisationId: organisation.id }
+      });
+
+      if (!isMember) {
+        const group = organisation.groups.find((g) => g.organisationRole === 'MEMBER') || organisation.groups[0];
+        if (group) {
+          await prisma.organisationMember.create({
+            data: {
+              id: crypto.randomUUID(),
+              userId: user.id,
+              organisationId: organisation.id,
+              organisationGroupMembers: {
+                create: {
+                  id: crypto.randomUUID(),
+                  groupId: group.id,
+                }
+              }
+            }
+          });
+        }
+      }
+    }
 
     // 3. Create Session
     const tokenStr = generateSessionToken();

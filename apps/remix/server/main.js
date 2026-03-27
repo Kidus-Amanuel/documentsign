@@ -32,4 +32,4 @@ const handler = handle(build, server);
 
 const port = parseInt(process.env.PORT || '3000', 10);
 
-serve({ fetch: handler.fetch, port });
+serve({ fetch: handler.fetch, port, hostname: '0.0.0.0' });

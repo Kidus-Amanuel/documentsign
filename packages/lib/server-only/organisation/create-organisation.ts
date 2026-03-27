@@ -178,6 +178,7 @@ export const createPersonalOrganisation = async ({
     }
 
     // Todo: (LOGS)
+    return null;
   });
 
   if (organisation) {
