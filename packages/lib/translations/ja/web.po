@@ -1015,6 +1015,10 @@ msgstr "組織を一意に識別する URL"
 msgid "A unique URL to identify your team"
 msgstr "チームを識別するための一意の URL"
 
+#: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
+msgid "A valid email is required"
+msgstr ""
+
 #: apps/remix/app/components/dialogs/team-email-add-dialog.tsx
 msgid "A verification email will be sent to the provided email."
 msgstr "入力されたメールアドレス宛てに確認メールが送信されます。"
@@ -2881,8 +2885,8 @@ msgid "Controls how long recipients have to complete signing before the document
 msgstr "受信者が文書の有効期限切れまでに署名を完了できる期間を設定します。有効期限後は、受信者は文書に署名できなくなります。"
 
 #: apps/remix/app/components/forms/email-preferences-form.tsx
-msgid "Controls the default email settings when new documents or templates are created"
-msgstr "新しいドキュメントやテンプレートを作成する際の既定のメール設定を制御します"
+msgid "Controls the default email settings when new documents or templates are created. Updating these settings will not affect existing documents or templates."
+msgstr ""
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Controls the default language of an uploaded document. This will be used as the language in email communications with the recipients."
@@ -3870,6 +3874,10 @@ msgstr "文書は <0>{0}</0> によって作成されました"
 msgid "Document created from direct template"
 msgstr "ダイレクトテンプレートから作成されたドキュメント"
 
+#: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "Document created from direct template email"
+msgstr ""
+
 #: apps/remix/app/components/general/template/template-page-view-recent-activity.tsx
 msgid "Document created using a <0>direct link</0>"
 msgstr "<0>ダイレクトリンク</0>から文書が作成されました"
@@ -4561,6 +4569,10 @@ msgstr "メールを送信しました！"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Email Settings"
 msgstr "メール設定"
+
+#: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "Email the owner when a document is created from a direct template"
+msgstr ""
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "Email the owner when a recipient signs"
@@ -10386,6 +10398,10 @@ msgid "This email is already being used by another team."
 msgstr "このメールアドレスは別のチームですでに使用されています。"
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "This email is sent to the document owner when a recipient creates a document via a direct template link."
+msgstr ""
+
+#: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "This email is sent to the document owner when a recipient has signed the document."
 msgstr "このメールは、受信者がドキュメントに署名したときにドキュメント所有者に送信されます。"
 
@@ -12977,6 +12993,10 @@ msgstr "現在のプランは非アクティブです。"
 msgid "Your current plan is past due."
 msgstr "現在のプランは支払いが滞っています。"
 
+#: apps/remix/app/routes/_authenticated+/settings+/organisations.tsx
+msgid "Your default organisation associated with the ERP."
+msgstr ""
+
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 msgid "Your direct signing templates"
 msgstr "あなたのダイレクト署名テンプレート"
@@ -13230,4 +13250,3 @@ msgstr "認証コード:"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "your-domain.com another-domain.com"
 msgstr "your-domain.com another-domain.com"
-

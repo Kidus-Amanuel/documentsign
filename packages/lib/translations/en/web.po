@@ -1010,6 +1010,10 @@ msgstr "A unique URL to identify your organisation"
 msgid "A unique URL to identify your team"
 msgstr "A unique URL to identify your team"
 
+#: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
+msgid "A valid email is required"
+msgstr "A valid email is required"
+
 #: apps/remix/app/components/dialogs/team-email-add-dialog.tsx
 msgid "A verification email will be sent to the provided email."
 msgstr "A verification email will be sent to the provided email."
@@ -2876,8 +2880,8 @@ msgid "Controls how long recipients have to complete signing before the document
 msgstr "Controls how long recipients have to complete signing before the document expires. After expiration, recipients can no longer sign the document."
 
 #: apps/remix/app/components/forms/email-preferences-form.tsx
-msgid "Controls the default email settings when new documents or templates are created"
-msgstr "Controls the default email settings when new documents or templates are created"
+msgid "Controls the default email settings when new documents or templates are created. Updating these settings will not affect existing documents or templates."
+msgstr "Controls the default email settings when new documents or templates are created. Updating these settings will not affect existing documents or templates."
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Controls the default language of an uploaded document. This will be used as the language in email communications with the recipients."
@@ -3865,6 +3869,10 @@ msgstr "Document created by <0>{0}</0>"
 msgid "Document created from direct template"
 msgstr "Document created from direct template"
 
+#: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "Document created from direct template email"
+msgstr "Document created from direct template email"
+
 #: apps/remix/app/components/general/template/template-page-view-recent-activity.tsx
 msgid "Document created using a <0>direct link</0>"
 msgstr "Document created using a <0>direct link</0>"
@@ -4556,6 +4564,10 @@ msgstr "Email sent!"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Email Settings"
 msgstr "Email Settings"
+
+#: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "Email the owner when a document is created from a direct template"
+msgstr "Email the owner when a document is created from a direct template"
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "Email the owner when a recipient signs"
@@ -10381,6 +10393,10 @@ msgid "This email is already being used by another team."
 msgstr "This email is already being used by another team."
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
+msgid "This email is sent to the document owner when a recipient creates a document via a direct template link."
+msgstr "This email is sent to the document owner when a recipient creates a document via a direct template link."
+
+#: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "This email is sent to the document owner when a recipient has signed the document."
 msgstr "This email is sent to the document owner when a recipient has signed the document."
 
@@ -12971,6 +12987,10 @@ msgstr "Your current plan is inactive."
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
 msgid "Your current plan is past due."
 msgstr "Your current plan is past due."
+
+#: apps/remix/app/routes/_authenticated+/settings+/organisations.tsx
+msgid "Your default organisation associated with the ERP."
+msgstr "Your default organisation associated with the ERP."
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 msgid "Your direct signing templates"
